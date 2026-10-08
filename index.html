@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Text Simplification Effects on Reading</title>
+<meta name="description" content="The Effect of Text Simplification on Reading Fluency and Reading Comprehension in L1 English Speakers. CogSci 2025. LaCC Lab, Technion.">
+<meta property="og:title" content="The Effect of Text Simplification on Reading Fluency and Reading Comprehension in L1 English Speakers">
+<meta property="og:description" content="The Effect of Text Simplification on Reading Fluency and Reading Comprehension in L1 English Speakers. CogSci 2025.">
+<meta property="og:image" content="static/images/fig.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+/* Layout: one centered column like the lab's project pages: title block, link buttons, abstract, sections, BibTeX, lab banner. */
+:root{
+  --bg:#ffffff; --surface:#f5f6f8; --fg:#16181d; --muted:#5a606b; --rule:#e2e5ea;
+  --blue:#1f6fbf; --orange:#c2690a; --btn:#16181d; --btn-fg:#ffffff;
+  --display:"DM Sans", "Helvetica Neue", Arial, sans-serif;
+  --body:"DM Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121418; --surface:#1b1e24; --fg:#eceef2; --muted:#a3a9b4; --rule:#2c3038;
+  --blue:#7fb2ec; --orange:#f0a24f; --btn:#eceef2; --btn-fg:#121418; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121418; --surface:#1b1e24; --fg:#eceef2; --muted:#a3a9b4; --rule:#2c3038;
+  --blue:#7fb2ec; --orange:#f0a24f; --btn:#eceef2; --btn-fg:#121418; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6;padding:0 16px}
+a{color:var(--blue)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.labbar{max-width:960px;margin:0 auto;padding-block:14px;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule);font-size:15px}
+.labbar .home{font-weight:700;color:var(--fg);text-decoration:none}
+.labbar nav{display:flex;flex-wrap:wrap;gap:6px 16px}
+.labbar nav a{color:var(--muted);text-decoration:none}
+.labbar nav a:hover{color:var(--blue)}
+main{max-width:960px;margin:0 auto;padding-block:48px 64px;display:flex;flex-direction:column;gap:56px}
+header{text-align:center;display:flex;flex-direction:column;gap:18px;align-items:center}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(28px,4.4vw,44px);line-height:1.15;margin:0;text-wrap:balance;max-width:26ch}
+h1 .et{color:var(--blue)} h1 .ara{color:var(--orange)}
+.authors{font-size:19px;margin:0}
+.authors a{color:var(--fg);text-decoration-color:var(--rule);text-underline-offset:4px}
+.authors a:hover{color:var(--blue)}
+.aff{margin:0;color:var(--muted);font-size:16px}
+.venue{margin:0;font-weight:500;font-size:18px}
+.venue span{color:var(--muted);font-weight:400}
+.buttons{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:6px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:999px;background:var(--btn);color:var(--btn-fg);text-decoration:none;font-weight:500;font-size:16px}
+.btn:hover{opacity:.85}
+button.btn{border:0;cursor:pointer;font-family:var(--body)}
+.btn.lab{background:transparent;color:var(--fg);border:2px solid var(--fg)}
+.btn svg{width:18px;height:18px;flex:none}
+section{display:flex;flex-direction:column;gap:16px}
+h2{font-family:var(--display);font-size:26px;margin:0;text-align:center}
+.abstract p{margin:0 auto;max-width:68ch;text-align:justify;hyphens:auto}
+.result{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:32px;align-items:center}
+@media (max-width:760px){.result{grid-template-columns:minmax(0,1fr)}}
+.result figure{margin:0;background:#ffffff;border:1px solid var(--rule);border-radius:12px;padding:12px}
+.result figure img{display:block;width:100%;height:auto}
+.result figcaption{color:#444a55;font-size:14px;margin-top:8px}
+.takeaways{display:flex;flex-direction:column;gap:18px;min-width:0}
+.takeaways h3{margin:0;font-size:20px}
+.takeaways p{margin:4px 0 0;color:var(--muted)}
+.k-orange{color:var(--orange)} .k-blue{color:var(--blue)}
+.bib{position:relative;background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:18px 20px;overflow-x:auto}
+.bib pre{margin:0;font-family:var(--mono);font-size:14px;line-height:1.55;white-space:pre}
+.copy{position:absolute;top:10px;right:10px;border:1px solid var(--rule);background:var(--bg);color:var(--fg);border-radius:8px;padding:4px 12px;font:500 14px var(--body);cursor:pointer}
+footer{max-width:960px;margin:0 auto;padding-block:20px 40px;border-top:1px solid var(--rule);color:var(--muted);font-size:14px;text-align:center}
+
+.flow{display:flex;flex-direction:column;gap:14px}
+.row{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px}
+.step{flex:1 1 150px;min-width:0;border:2px solid var(--rule);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:4px;justify-content:center}
+.step b{font-size:16px} .step span{color:var(--muted);font-size:15px}
+.row.eye .step{border-color:var(--blue)} .row.ara .step{border-color:var(--orange)}
+.arrow{align-self:center;color:var(--muted);font-size:22px;flex:none}
+.delta{flex:0 1 auto;border:none;padding:0 4px}
+.row.eye .delta b{color:var(--blue)} .row.ara .delta b{color:var(--orange)}
+.pearson{border:2px solid var(--fg);border-radius:12px;padding:14px 18px;text-align:center}
+.pearson b{font-size:20px} .pearson p{margin:4px 0 0;color:var(--muted)}
+.red{color:#c0392b} .green{color:#2e8b57}
+:root[data-theme="dark"] .red, :root[data-theme="dark"] .green{filter:brightness(1.4)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .red,:root:not([data-theme="light"]) .green{filter:brightness(1.4)}}
+.num{font-variant-numeric:tabular-nums;font-weight:700;font-size:18px}
+.readers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+@media (max-width:760px){.readers{grid-template-columns:minmax(0,1fr)}}
+.readers figure{margin:0;display:flex;flex-direction:column;gap:8px}
+.readers img{width:100%;height:auto;border:1px solid var(--rule);border-radius:10px;background:#ffffff}
+.readers figcaption{font-size:16px} .readers figcaption b{color:var(--blue)}
+.lead{margin:0 auto;max-width:68ch;text-align:center;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:760px){.cards{grid-template-columns:minmax(0,1fr)}}
+.card{border:1px solid var(--rule);border-radius:12px;padding:16px 18px;min-width:0}
+.card h3{margin:0;font-size:19px} .card p{margin:6px 0 0;color:var(--muted)}
+.takeaways-list{margin:0 auto;max-width:68ch;padding-left:1.2em;display:flex;flex-direction:column;gap:10px;font-size:18px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:10px;font-size:15px;color:var(--fg)}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.legend i{display:inline-block;width:22px;height:14px;border:1px solid #111;border-radius:2px}
+.tool-link{margin:4px 0 0;text-align:center}
+.more{max-width:960px;margin:8px auto 32px;padding:32px 24px;background:var(--surface);border:1px solid var(--rule);border-radius:16px;text-align:center}
+.more h2{margin:0 0 20px}
+.more-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+@media (max-width:760px){.more-grid{grid-template-columns:minmax(0,1fr)}.more{margin-inline:16px}}
+.more-grid a{display:flex;flex-direction:column;gap:4px;padding:16px;background:var(--bg);border:1px solid var(--rule);border-radius:12px;text-decoration:none;color:var(--fg)}
+.more-grid a:hover{border-color:var(--blue)}
+.more-grid span{color:var(--muted);font-size:15px}
+.more-lab{margin:20px 0 0}
+.ic{width:28px;height:28px;flex:none;vertical-align:middle}
+.ic.big{width:40px;height:40px;margin-bottom:8px}
+.ic.sm{width:18px;height:18px;margin-top:-3px}
+.icons{display:flex;gap:6px;align-items:center;margin-bottom:6px}
+.pearson .icons{justify-content:center}
+.step b .red{color:#c0392b} .step b .green{color:#2e8b57}
+.c-red{color:#c0392b} .c-green{color:#2e8b57} .c-blue{color:var(--blue)} .c-orange{color:var(--orange)} .c-fg{color:var(--fg)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .c-red,:root:not([data-theme="light"]) .c-green{filter:brightness(1.4)}}
+.icons-list{list-style:none;padding-left:0}
+.icons-list li{display:flex;gap:12px;align-items:flex-start}
+.icons-list .ic{margin-top:1px}
+.card{text-align:left}
+.note{margin:-4px 0 0;text-align:right;color:var(--muted);font-size:14px;font-style:italic}
+.wide{margin:0;background:#ffffff;border:1px solid var(--rule);border-radius:12px;padding:12px}
+.wide img{display:block;width:100%;height:auto}
+.wide figcaption{color:#444a55;font-size:14px;margin-top:8px}
+.findings{margin:0 auto;max-width:68ch;padding-left:1.2em;display:flex;flex-direction:column;gap:8px;font-size:18px}
+.k-red{color:#c0392b} .k-green{color:#2e8b57}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .k-red,:root:not([data-theme="light"]) .k-green{filter:brightness(1.4)}}
+.abs-fold p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;line-clamp:4;overflow:hidden}
+.abs-fold.open p{display:block;-webkit-line-clamp:unset;overflow:visible}
+.abs-toggle{display:block;margin:10px auto 0;border:1px solid var(--rule);background:var(--bg);color:var(--fg);border-radius:999px;padding:6px 16px;font:500 15px var(--body);cursor:pointer}
+.abs-toggle:hover{border-color:var(--blue)}
+header .buttons.secondary{margin-top:-6px}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>The Effect of <span class="k-green">Text Simplification</span> on <span class="et">Reading Fluency</span> and <span class="et">Reading Comprehension</span> in L1 English Speakers</h1>
+    <p class="authors">
+      <a href="https://kerengruteke.github.io/">Keren Gruteke Klein</a>,
+      <a href="https://omershubi.github.io/">Omer Shubi</a>,
+      Shachar Frenkel,
+      <a href="https://people.csail.mit.edu/berzak/">Yevgeni Berzak</a>
+    </p>
+    <p class="aff">Faculty of Data and Decision Sciences, Technion – Israel Institute of Technology</p>
+    <p class="venue">CogSci 2025 <span>· Oral</span></p>
+    <div class="buttons">
+      <a class="btn" href="https://escholarship.org/uc/item/3tb1553f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/></svg>Paper</a>
+      <a class="btn" href="https://github.com/lacclab/text-simplification-effects-eye-movements"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></svg>Code</a>
+      <button class="btn" id="citebtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 7h4v4H7zM7 11c0 3-1 5-3 6M15 7h4v4h-4zM15 11c0 3-1 5-3 6"/></svg><span>Cite This Paper</span></button>
+    </div>
+    <div class="buttons secondary">
+      <a class="btn lab" href="https://github.com/lacclab/OneStop-Eye-Movements"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>OneStop Data</a>
+      <a class="btn lab" href="https://lacclab.github.io/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>LaCC Lab</a>
+    </div>
+  </header>
+
+  <section class="abstract" aria-labelledby="abs">
+    <h2 id="abs">Abstract</h2>
+    <div class="abs-fold" id="absfold"><p><span class="k-green">Text simplification</span> is a common practice for making texts easier to read and easier to understand. To which extent does it achieve these goals, and which participant and text characteristics drive simplification benefits? In this work, we use <span class="k-blue">eye tracking</span> to address these questions for the first time for the population of adult native (L1) English speakers. We find that 42% of the readers exhibit <span class="k-blue">reading facilitation effects</span>, while only 2% improve reading comprehension accuracy. We further observe that <span class="k-blue">reading fluency benefits</span> are larger for slower and less experienced readers, while comprehension benefits are more substantial in lower comprehension readers, but not vice versa. Finally, we find that <span class="k-red">high-complexity original texts</span> are key for <span class="k-blue">enhancing reading fluency</span>, while <span class="k-green">large complexity reduction</span> is more pertinent to improving comprehension. Our study highlights the potential of cognitive measures in the evaluation of text simplification and distills empirically driven principles for enhancing <span class="k-green">simplification effectiveness</span>.</p></div>
+    <button class="abs-toggle" id="abstoggle" type="button" aria-expanded="false" aria-controls="absfold">Read full abstract</button>
+  </section>
+
+  <section aria-labelledby="res">
+    <h2 id="res">Key Findings</h2>
+    <figure class="wide">
+      <img src="static/images/fig.png" alt="Per-participant and per-paragraph simplification effects on Total Fixation duration and on comprehension accuracy, with 95% confidence intervals colored by significance.">
+      <figcaption>Simplification effects on per word Total Fixation Duration (left) and reading comprehension accuracy (right) per participant (top) and per paragraph (bottom). The simplification effect is the measured difference between the simplified and the original text levels. Error bars represent 95% confidence intervals.</figcaption>
+    </figure>
+    <ul class="findings">
+      <li><span class="k-blue">42%</span> of readers read simplified texts more fluently; only 2% improve comprehension accuracy.</li>
+      <li>Fluency benefits are larger for slower and less experienced readers.</li>
+      <li>Comprehension benefits are larger for lower comprehension readers.</li>
+      <li>High-complexity originals drive fluency gains; large complexity reduction matters more for comprehension.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="bibh">
+    <h2 id="bibh">BibTeX</h2>
+    <div class="bib">
+      <button class="copy" id="copybib" type="button">Copy</button>
+<pre id="bibtext">@inproceedings{gruteke2025effect,
+  title     = {The Effect of Text Simplification on Reading Fluency and Reading Comprehension in L1 English Speakers},
+  author    = {Gruteke Klein, Keren and Shubi, Omer and Frenkel, Shachar and Berzak, Yevgeni},
+  booktitle = {Proceedings of the Annual Meeting of the Cognitive Science Society},
+  volume    = {47},
+  year      = {2025}
+}</pre>
+    </div>
+  </section>
+</main>
+<section class="more" aria-labelledby="more-h">
+  <h2 id="more-h">Read More from Our Lab</h2>
+  <div class="more-grid">
+    <a href="https://lacclab.github.io/Readability-Evaluation-Using-Reading-Ease-Landing/"><b>Readability Evaluation with Reading Ease</b><span>Computational Linguistics 2026</span></a>
+    <a href="https://lacclab.github.io/Surprisal-Reading-Regimes-Landing/"><b>Surprisal in Reading Regimes</b><span>CoNLL 2024</span></a>
+    <a href="https://lacclab.github.io/Open-Ended-Goal-Decoding-Landing/"><b>Open-Ended Goal Decoding</b><span>ICLR 2026</span></a>
+    <a href="https://eyebench.github.io/"><b>EyeBench</b><span>NeurIPS 2025</span></a>
+    <a href="https://lacclab.github.io/Decoding-Reading-Goals-from-Eye-Movements-Landing/"><b>Decoding Reading Goals</b><span>ACL 2025</span></a>
+  </div>
+  <p class="more-lab"><a class="btn lab" href="https://lacclab.github.io/">LaCC Lab · Technion</a></p>
+</section>
+<footer>Language, Computation and Cognition Lab, Technion · <a href="https://lacclab.github.io/">lacclab.github.io</a></footer>
+<script>
+function copyBib(label, idle, onFail){
+  var t=document.getElementById('bibtext').textContent;
+  function done(){ label.textContent='Copied!'; setTimeout(function(){ label.textContent=idle; },1500); }
+  try { navigator.clipboard.writeText(t).then(done, onFail); } catch(e){ onFail(); }
+}
+function selectBib(){ var r=document.createRange(); r.selectNodeContents(document.getElementById('bibtext')); var s=window.getSelection(); s.removeAllRanges(); s.addRange(r); }
+document.getElementById('copybib').addEventListener('click', function(){
+  var b=this; copyBib(b,'Copy',function(){ selectBib(); b.textContent='Selected'; });
+});
+document.getElementById('citebtn').addEventListener('click', function(){
+  var l=this.querySelector('span'); copyBib(l,'Cite This Paper',function(){ document.getElementById('bibh').scrollIntoView({behavior:'smooth'}); selectBib(); l.textContent='BibTeX Below'; setTimeout(function(){ l.textContent='Cite This Paper'; },1500); });
+});
+</script>
+<script>
+(function(){var w=document.getElementById('absfold'),b=document.getElementById('abstoggle');if(!w||!b)return;
+b.addEventListener('click',function(){var o=w.classList.toggle('open');b.textContent=o?'Show less':'Read full abstract';b.setAttribute('aria-expanded',o);});})();
+</script>
+</body>
+</html>
